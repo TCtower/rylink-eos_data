@@ -5,9 +5,39 @@ import (
 	"io/ioutil"
 	"fmt"
 	"encoding/json"
+	"bytes"
 )
 type requestBlcok 	struct {
 	Block_num_or_id int `json:"block_num_or_id"`
+}
+
+func getBlockInfo(blockNum int) string{
+	//get block info
+	requestBody := &requestBlcok{
+		blockNum,
+	}
+	fmt.Print(requestBody.Block_num_or_id)
+	requestStr, err := json.Marshal(requestBody)
+	if err != nil{
+		fmt.Print("failed to endcode json")
+	}
+
+	fmt.Println(string(requestStr))
+
+	body := bytes.NewBuffer([]byte(requestStr))
+	res,err := http.Post("http://172.17.2.67:8888/v1/chain/get_block", "application/json;charset=utf-8", body)
+	if err != nil {
+		fmt.Print("Failed to post data")
+		return "Fail"
+	}
+	result, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Print("Failed to get response")
+		return "Fail"
+	}
+
+	res.Body.Close()
+	return string(result);
 }
 
 func main() {
@@ -30,30 +60,6 @@ func main() {
 		fmt.Println(bodystr)
 	}
 
-	//get block info
-	//requestBody := &requestBlcok{
-	//	191,
-	//}
-	//fmt.Print(requestBody.Block_num_or_id)
-	//requestStr, err := json.Marshal(requestBody)
-	//if err != nil{
-	//	fmt.Print("failed to endcode json")
-	//}
-	//
-	//
-	//fmt.Println(string(requestStr))
-	//
-	//body := bytes.NewBuffer([]byte(requestStr))
-	//res,err := http.Post("http://127.0.0.1:8888/v1/chain/get_block", "application/json;charset=utf-8", body)
-	//if err != nil {
-	//	fmt.Print("Failed to post data")
-	//	return
-	//}
-	//result, err := ioutil.ReadAll(res.Body)
-	//if err != nil {
-	//	fmt.Print("Failed to get response")
-	//	return
-	//}
-	//fmt.Printf(string(result))
-	//res.Body.Close()
+	fmt.Print(getBlockInfo(189))
+
 }
