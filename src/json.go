@@ -80,7 +80,7 @@ func ite_map(m map[string]interface{}){
 	}
 }
 
-func toStruct(str string){
+func ToStruct(str string){
 	block_msg :=Block{}
 	err := json.Unmarshal([]byte(str), &block_msg)
 	if err != nil {
@@ -207,5 +207,5 @@ func test() {
   "block_num": 3726594,
   "ref_block_prefix": 1203011351
 }`
-	toStruct(str)
+	ToStruct(str)
 }

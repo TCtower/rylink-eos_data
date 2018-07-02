@@ -60,6 +60,7 @@ func main() {
 		fmt.Println(bodystr)
 	}
 
-	fmt.Print(getBlockInfo(189))
+	//fmt.Print(getBlockInfo(189))
+	ToStruct(getBlockInfo(189))
 
 }
