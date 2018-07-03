@@ -31,7 +31,12 @@ func fieldCheck(blockInfo string){
 		fmt.Print(" ", reflect.ValueOf(Map["transactions"]).Len())
 		trans := reflect.ValueOf(Map["transactions"]);
 		if trans.Len() > 0 {
-			fmt.Print(trans.Index(0))
+			for i := 0; i < trans.Len(); i++{
+
+			}
+
+			//x, _ := trans.Index(0).(map[string]string)
+			//fmt.Print(x["status"])
 		}
 
 		fmt.Println("")

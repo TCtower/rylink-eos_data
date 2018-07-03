@@ -61,6 +61,6 @@ func main() {
 		fmt.Println(bodystr)
 	}
 
-	fieldCheck(getBlockInfo(189))
+	//fieldCheck(getBlockInfo(189))
 
 }
